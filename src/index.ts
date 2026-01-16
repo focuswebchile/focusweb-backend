@@ -6,7 +6,16 @@ import siteRoutes from "./routes/sites"
 
 const app = express()
 
-app.use(cors({ origin: env.CORS_ORIGIN }))
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || env.corsOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+      return callback(new Error("Not allowed by CORS"))
+    },
+  }),
+)
 app.use(express.json({ limit: "1mb" }))
 
 app.get("/health", (_req, res) => {
