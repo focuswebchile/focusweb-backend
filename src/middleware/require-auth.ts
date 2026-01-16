@@ -1,6 +1,5 @@
 import type { Request, Response, NextFunction } from "express"
-import jwt from "jsonwebtoken"
-import { env } from "../config/env"
+import { supabaseAdmin } from "../services/supabase"
 
 type JwtPayload = {
   sub: string
@@ -20,11 +19,11 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   }
 
   const token = authHeader.replace("Bearer ", "")
-  try {
-    const decoded = jwt.verify(token, env.SUPABASE_JWT_SECRET) as JwtPayload
-    req.user = decoded
+  supabaseAdmin.auth.getUser(token).then(({ data, error }) => {
+    if (error || !data?.user) {
+      return res.status(401).json({ error: "Invalid token" })
+    }
+    req.user = { sub: data.user.id, email: data.user.email ?? undefined } satisfies JwtPayload
     return next()
-  } catch (error) {
-    return res.status(401).json({ error: "Invalid token" })
-  }
+  })
 }
