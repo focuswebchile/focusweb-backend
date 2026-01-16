@@ -24,10 +24,30 @@ const settingsSchema = z.object({
     .optional(),
   content: z
     .object({
-      hero_title: z.string().min(1),
-      hero_subtitle: z.string().min(1),
-      primary_cta_text: z.string().min(1),
-      primary_cta_url: z.string().url(),
+      hero: z
+        .object({
+          title: z.string().min(1),
+          subtitle: z.string().min(1),
+          cta: z
+            .object({
+              primary_text: z.string().min(1),
+              primary_url: z.string().url(),
+            })
+            .optional(),
+        })
+        .optional(),
+      services: z
+        .object({
+          title: z.string().min(1),
+          intro: z.string().min(1),
+        })
+        .optional(),
+      contact: z
+        .object({
+          title: z.string().min(1),
+          subtitle: z.string().min(1),
+        })
+        .optional(),
     })
     .optional(),
   toggles: z
