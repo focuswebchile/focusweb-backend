@@ -9,52 +9,52 @@ const router = Router()
 const settingsSchema = z.object({
   colors: z
     .object({
-      primary: z.string().min(1),
-      secondary: z.string().min(1),
-      background: z.string().min(1),
-      text: z.string().min(1),
+      primary: z.string().optional(),
+      secondary: z.string().optional(),
+      background: z.string().optional(),
+      text: z.string().optional(),
     })
     .optional(),
   typography: z
     .object({
-      fontFamily: z.string().min(1),
-      baseSize: z.string().min(1),
-      lineHeight: z.string().min(1),
+      fontFamily: z.string().optional(),
+      baseSize: z.string().optional(),
+      lineHeight: z.string().optional(),
     })
     .optional(),
   content: z
     .object({
       hero: z
         .object({
-          title: z.string().min(1),
-          subtitle: z.string().min(1),
+          title: z.string().optional(),
+          subtitle: z.string().optional(),
           cta: z
             .object({
-              primary_text: z.string().min(1),
-              primary_url: z.string().url(),
+              primary_text: z.string().optional(),
+              primary_url: z.string().optional(),
             })
             .optional(),
         })
         .optional(),
       services: z
         .object({
-          title: z.string().min(1),
-          intro: z.string().min(1),
+          title: z.string().optional(),
+          intro: z.string().optional(),
         })
         .optional(),
       contact: z
         .object({
-          title: z.string().min(1),
-          subtitle: z.string().min(1),
+          title: z.string().optional(),
+          subtitle: z.string().optional(),
         })
         .optional(),
     })
     .optional(),
   toggles: z
     .object({
-      showTestimonials: z.boolean(),
-      showFAQ: z.boolean(),
-      showProcess: z.boolean(),
+      showTestimonials: z.boolean().optional(),
+      showFAQ: z.boolean().optional(),
+      showProcess: z.boolean().optional(),
     })
     .optional(),
 })
