@@ -52,9 +52,11 @@ const settingsSchema = z.object({
     .optional(),
   toggles: z
     .object({
+      showServices: z.boolean().optional(),
       showTestimonials: z.boolean().optional(),
       showFAQ: z.boolean().optional(),
       showProcess: z.boolean().optional(),
+      showContact: z.boolean().optional(),
     })
     .optional(),
 })
