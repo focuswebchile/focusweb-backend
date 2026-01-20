@@ -39,7 +39,29 @@ const settingsSchema = z.object({
       services: z
         .object({
           title: z.string().optional(),
-          intro: z.string().optional(),
+          subtitle: z.string().optional(),
+          items: z
+            .object({
+              service_1: z
+                .object({
+                  title: z.string().optional(),
+                  description: z.string().optional(),
+                })
+                .optional(),
+              service_2: z
+                .object({
+                  title: z.string().optional(),
+                  description: z.string().optional(),
+                })
+                .optional(),
+              service_3: z
+                .object({
+                  title: z.string().optional(),
+                  description: z.string().optional(),
+                })
+                .optional(),
+            })
+            .optional(),
         })
         .optional(),
       contact: z
