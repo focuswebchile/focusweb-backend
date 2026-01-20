@@ -70,6 +70,16 @@ const settingsSchema = z.object({
           subtitle: z.string().optional(),
         })
         .optional(),
+      faq: z
+        .object({
+          question_1: z.string().optional(),
+          answer_1: z.string().optional(),
+          question_2: z.string().optional(),
+          answer_2: z.string().optional(),
+          question_3: z.string().optional(),
+          answer_3: z.string().optional(),
+        })
+        .optional(),
     })
     .optional(),
   toggles: z
