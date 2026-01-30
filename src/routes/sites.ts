@@ -6,6 +6,16 @@ import { supabaseAdmin } from "../services/supabase"
 
 const router = Router()
 
+const serviceItemSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+})
+
+const faqItemSchema = z.object({
+  question: z.string().optional(),
+  answer: z.string().optional(),
+})
+
 const settingsSchema = z.object({
   colors: z
     .object({
@@ -37,32 +47,16 @@ const settingsSchema = z.object({
         })
         .optional(),
       services: z
-        .object({
-          title: z.string().optional(),
-          subtitle: z.string().optional(),
-          items: z
+        .union([
+          z.array(serviceItemSchema),
+          z
             .object({
-              service_1: z
-                .object({
-                  title: z.string().optional(),
-                  description: z.string().optional(),
-                })
-                .optional(),
-              service_2: z
-                .object({
-                  title: z.string().optional(),
-                  description: z.string().optional(),
-                })
-                .optional(),
-              service_3: z
-                .object({
-                  title: z.string().optional(),
-                  description: z.string().optional(),
-                })
-                .optional(),
+              title: z.string().optional(),
+              subtitle: z.string().optional(),
+              items: z.array(serviceItemSchema).optional(),
             })
             .optional(),
-        })
+        ])
         .optional(),
       contact: z
         .object({
@@ -70,6 +64,7 @@ const settingsSchema = z.object({
           subtitle: z.string().optional(),
         })
         .optional(),
+      faqs: z.array(faqItemSchema).optional(),
       faq: z
         .object({
           question_1: z.string().optional(),
